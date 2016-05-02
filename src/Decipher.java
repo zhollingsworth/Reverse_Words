@@ -15,4 +15,50 @@ When writing your function, assume the message contains only letters and spaces,
 ********************************************************************************************************************************/
 public class Decipher {
 
+	public static String reverseWords(String received)
+	{
+		char[] transcribed = received.toCharArray();
+		int rev = transcribed.length-1;
+		int start = 0;
+		int end = 0;
+		
+		for(int i = 0; i < transcribed.length/2; i++)
+		{
+			char temp = transcribed[i];
+			transcribed[i] = transcribed[rev];
+			transcribed[rev] = temp;
+			rev--;
+		}
+		
+		for(int k = 0; k < transcribed.length; k++)
+		{
+			if(transcribed[k] == ' ')
+			{
+				end = k-1;
+				for(int l = start; l < k/2; l++)
+				{
+					char temp = transcribed[l];
+					transcribed[l] = transcribed[end];
+					transcribed[end] = temp;
+					end--;
+				}
+				start = k+1;
+			}
+		}
+		
+		
+		for(int j = 0; j<transcribed.length; j++)
+		{
+			System.out.print(transcribed[j]);
+		}
+		
+		return received;
+	}
+	
+	public static void main(String[] args)
+	{
+		String message = "find you will pain only go you recordings security the into if";
+		reverseWords(message);
+		
+	}
 }
